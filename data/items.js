@@ -45,7 +45,7 @@ const ITEM_DEFINITIONS = {
   },
 
   ruby: {
-    id: 'ruby', name: 'Rubí', icon: '❤️',
+    id: 'ruby', name: 'Rubí', icon: '♦️',
     description: 'Una gema roja de gran valor.',
     category: 'sellable', rarity: 'uncommon', xp: 10,
     usable: false, equippable: false, consumable: false,
@@ -101,7 +101,7 @@ const ITEM_DEFINITIONS = {
   },
 
   abyss_crystal: {
-    id: 'abyss_crystal', name: 'Cristal del Abismo', icon: '🔮',
+    id: 'abyss_crystal', name: 'Cristal del Abismo', icon: '✧',
     description: 'Un cristal que parece contener energía del Abismo.',
     category: 'material', rarity: 'epic', xp: 50,
     usable: false, equippable: false, consumable: false,
@@ -117,7 +117,7 @@ const ITEM_DEFINITIONS = {
   },
 
   black_diamond: {
-    id: 'black_diamond', name: 'Diamante negro', icon: '💎',
+    id: 'black_diamond', name: 'Diamante negro', icon: '♢',
     description: 'Una gema extremadamente rara y oscura.',
     category: 'sellable', rarity: 'epic', xp: 55,
     usable: false, equippable: false, consumable: false,
@@ -133,7 +133,7 @@ const ITEM_DEFINITIONS = {
   },
 
   abyss_heart: {
-    id: 'abyss_heart', name: 'Corazón del Abismo', icon: '💜',
+    id: 'abyss_heart', name: 'Corazón del Abismo', icon: '🖤',
     description: 'Un cristal con forma de corazón que late con energía oscura.',
     category: 'misc', rarity: 'legendary', xp: 180,
     usable: false, equippable: false, consumable: false,
@@ -168,14 +168,14 @@ const ITEM_DEFINITIONS = {
   ,
   // ===== NUEVOS TESOROS =====
   ari_lost_diamond: {
-    id: 'ari_lost_diamond', name: 'Diamante Perdido de Ari', icon: '💎',
+    id: 'ari_lost_diamond', name: 'Diamante Perdido de Ari', icon: '◆',
     description: 'Un diamante mítico que Ari escondió en algún rincón del Abismo y, con el paso de los años, olvidó por completo dónde lo dejó. Algunos mineros aseguran que solo aparece ante quien está destinado a encontrarlo.',
     category: 'treasure', rarity: 'very_rare', xp: 100,
     usable: false, equippable: false, consumable: false,
     sellable: true, droppable: true, stackable: false
   },
   emerald_of_change: {
-    id: 'emerald_of_change', name: 'Esmeralda del Cambio', icon: '💚',
+    id: 'emerald_of_change', name: 'Esmeralda del Cambio', icon: '◇',
     description: 'Una esmeralda legendaria nacida de una veta que cambia con el destino. Se dice que quien la encuentra nunca vuelve a ser exactamente el mismo minero.',
     category: 'treasure', rarity: 'legendary', xp: 200,
     usable: false, equippable: false, consumable: false,
@@ -184,13 +184,13 @@ const ITEM_DEFINITIONS = {
 
   // ===== 16 NUEVOS OBJETOS =====
   coal_chunk: {
-    id: 'coal_chunk', name: 'Trozo de carbón', icon: '⚫',
+    id: 'coal_chunk', name: 'Trozo de carbón', icon: '🪵',
     description: 'Carbón común, útil para forjar y fundir materiales.',
     category: 'material', rarity: 'common', xp: 2,
     usable: false, equippable: false, consumable: false, sellable: true, droppable: true, stackable: true
   },
   copper_ore: {
-    id: 'copper_ore', name: 'Mineral de cobre', icon: '🟠',
+    id: 'copper_ore', name: 'Mineral de cobre', icon: '🔶',
     description: 'Un mineral rojizo frecuente en las capas superiores.',
     category: 'material', rarity: 'common', xp: 3,
     usable: false, equippable: false, consumable: false, sellable: true, droppable: true, stackable: true
@@ -202,7 +202,7 @@ const ITEM_DEFINITIONS = {
     usable: false, equippable: false, consumable: false, sellable: true, droppable: true, stackable: true
   },
   clay_piece: {
-    id: 'clay_piece', name: 'Fragmento de arcilla', icon: '🟤',
+    id: 'clay_piece', name: 'Fragmento de arcilla', icon: '🟧',
     description: 'Arcilla endurecida que puede convertirse en piezas útiles.',
     category: 'material', rarity: 'common', xp: 2,
     usable: false, equippable: false, consumable: false, sellable: true, droppable: true, stackable: true
@@ -227,7 +227,7 @@ const ITEM_DEFINITIONS = {
     usable: false, equippable: false, consumable: false, sellable: true, droppable: true, stackable: true
   },
   silver_nugget: {
-    id: 'silver_nugget', name: 'Pepita de plata', icon: '⚪',
+    id: 'silver_nugget', name: 'Pepita de plata', icon: '⬥⬥',
     description: 'Una pequeña pepita de plata hallada en una veta escondida.',
     category: 'material', rarity: 'uncommon', xp: 8,
     usable: false, equippable: false, consumable: false, sellable: true, droppable: true, stackable: true
@@ -272,7 +272,7 @@ const ITEM_DEFINITIONS = {
   },
 
   void_shard: {
-    id: 'void_shard', name: 'Fragmento del Vacío', icon: '🟣',
+    id: 'void_shard', name: 'Fragmento del Vacío', icon: '🌑',
     description: 'Un fragmento imposible que parece absorber la luz que lo rodea.',
     category: 'material', rarity: 'legendary', xp: 80,
     usable: false, equippable: false, consumable: false, sellable: true, droppable: true, stackable: false
@@ -286,7 +286,7 @@ const ITEM_DEFINITIONS = {
 
   // ===== MATERIALES DE FABRICACIÓN =====
   forged_iron_ingot: {
-    id: 'forged_iron_ingot', name: 'Lingote de hierro forjado', icon: '🔧',
+    id: 'forged_iron_ingot', name: 'Lingote de hierro forjado', icon: '⚒️',
     description: 'Lingote preparado para fabricar equipamiento básico. Es un componente de fabricación.',
     category: 'craft_material', rarity: 'uncommon', xp: 10,
     usable: false, equippable: false, consumable: false, sellable: true, droppable: true, stackable: true
