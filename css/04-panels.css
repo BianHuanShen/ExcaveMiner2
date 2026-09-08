@@ -1,0 +1,128 @@
+/* =============================================================
+   EL MINERO DEL ABISMO — PANELES
+   Pestañas, paneles generales y tienda.
+   ============================================================= */
+
+#bottom-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: clamp(7px, 1.4vw, 11px);
+
+  background: var(--violet-panel);
+  border: 2px solid var(--violet-border);
+  border-radius: var(--radius-sm);
+
+  color: #ccc;
+  font-size: var(--ui-font);
+  cursor: pointer;
+
+  transition: background .12s ease, color .12s ease;
+}
+
+.tab-btn.active {
+  background: var(--violet-border);
+  color: #fff;
+}
+
+.panel {
+  width: 100%;
+  background: var(--bg-panel);
+  border: 2px solid var(--violet-border);
+  border-radius: var(--radius-md);
+
+  padding: clamp(8px, 1.4vw, 14px);
+  font-size: var(--ui-font);
+
+  max-height: 32vh;
+  overflow-y: auto;
+}
+
+.panel h3 {
+  margin-top: 0;
+  color: var(--gold);
+}
+
+.panel h4 {
+  color: var(--violet-text);
+  margin-bottom: 6px;
+}
+
+
+#sell-list,
+#pickaxe-shop,
+#other-shop {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.shop-section {
+  margin-bottom: 16px;
+}
+
+.shop-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  background: #1a1428;
+  border: 1px solid #2a2140;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+}
+
+.shop-item .shop-visual {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.shop-item .shop-icon {
+  flex: 0 0 auto;
+  font-size: 1.7em;
+}
+
+.shop-item .shop-info {
+  min-width: 0;
+}
+
+.shop-item .shop-name {
+  color: var(--text-main);
+}
+
+.shop-item .shop-rarity {
+  font-size: .7em;
+  font-weight: bold;
+}
+
+.shop-item button,
+.action-btn {
+  background: var(--green-panel);
+  border: 1px solid var(--green);
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-size: .85em;
+  padding: 6px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.shop-item button:disabled {
+  background: #333;
+  border-color: #555;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.action-btn {
+  width: 100%;
+  padding: 11px;
+  margin-top: 10px;
+  font-weight: bold;
+}
