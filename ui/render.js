@@ -71,16 +71,55 @@ function renderPlayerCharacter() {
 
   return `
     <div class="player-character" aria-label="Minero equipado">
-      <div class="player-shadow"></div>
-      <div class="player-weapon ${weapon ? 'has-weapon' : ''}" title="${weapon?.name || 'Sin arma'}">${weapon?.icon || ''}</div>
-      <div class="player-helmet ${helmet ? 'equipped' : ''}">${helmet ? '⛑️' : ''}</div>
-      <div class="player-head"></div>
-      <div class="player-torso ${armor ? 'equipped' : ''}"></div>
-      <div class="player-belt"></div>
-      <div class="player-legs ${legs ? 'equipped' : ''}"></div>
-      <div class="player-boots ${boots ? 'equipped' : ''}"></div>
-      <div class="player-lamp"></div>
-      <div class="player-glow"></div>
+      <svg class="player-svg" viewBox="0 0 100 120" role="img" aria-label="Minero">
+        <defs>
+          <linearGradient id="minerSkin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#efb07a"/><stop offset=".7" stop-color="#b86d48"/><stop offset="1" stop-color="#713c2c"/></linearGradient>
+          <linearGradient id="minerSuit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#56697a"/><stop offset=".55" stop-color="#303c48"/><stop offset="1" stop-color="#151c24"/></linearGradient>
+          <linearGradient id="minerMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8eef2"/><stop offset=".5" stop-color="#8896a1"/><stop offset="1" stop-color="#3b454e"/></linearGradient>
+          <radialGradient id="minerLight"><stop offset="0" stop-color="#fff6bf" stop-opacity=".95"/><stop offset=".25" stop-color="#ffd45e" stop-opacity=".4"/><stop offset="1" stop-color="#ffd45e" stop-opacity="0"/></radialGradient>
+        </defs>
+        <ellipse cx="51" cy="112" rx="28" ry="5" fill="#000" opacity=".48"/>
+        <g class="player-body-group">
+          <ellipse class="lamp-glow" cx="58" cy="34" rx="28" ry="27" fill="url(#minerLight)"/>
+          <!-- mochila -->
+          <path d="M19 55Q12 59 15 83l7 5 8-7-3-25Z" fill="#352318" stroke="#a36a37" stroke-width="1.3"/>
+          <path d="M18 61h10M17 69h11M18 77h9" stroke="#d29a58" stroke-opacity=".35" stroke-width="1.2"/>
+          <!-- piernas -->
+          <path class="suit" d="M31 82h15l-2 22-9 4-7-5Z"/>
+          <path class="suit" d="M47 82h15l4 21-8 5-10-4Z"/>
+          <!-- botas -->
+          <path class="boot" d="M27 99h17l2 7-6 8H22l-2-5Z"/>
+          <path class="boot" d="M53 101h14l12 7-2 6H56l-6-7Z"/>
+          <path d="M23 108h20M56 110h23" stroke="#d0d7dc" stroke-opacity=".25" stroke-width="2"/>
+          <!-- torso -->
+          <path class="suit ${armor ? 'equipped-glow' : ''}" d="M27 50Q36 45 51 47Q64 45 72 53l-4 33-15 5-26-5Z"/>
+          ${armor ? '<path class="metal" d="M30 55l8-5 9 4 8-4 11 6-4 27-11 2-3-17-4 17-12-3Z"/><path d="M51 50v34M33 65h34" stroke="#f5fbff" stroke-opacity=".16" stroke-width="2"/>' : '<path class="suit-light" d="M35 53h10v29H34Z" opacity=".45"/><path d="M51 52v30M31 66h39" stroke="#fff" stroke-opacity=".12" stroke-width="2"/>'}
+          <!-- brazos -->
+          <path class="suit" d="M28 55q-9 8-7 23l7 4 7-5-2-18Z"/>
+          <path class="suit" d="M68 55q10 7 9 22l-7 5-7-5 2-18Z"/>
+          <circle class="skin" cx="26" cy="82" r="5"/><circle class="skin" cx="75" cy="82" r="5"/>
+          <!-- cinturón -->
+          <path class="leather" d="M28 78h42v8H29Z"/>
+          <rect x="47" y="78" width="9" height="8" rx="1.5" fill="#d6aa56" stroke="#ffe4a2" stroke-opacity=".45"/>
+          <!-- cuello/cabeza -->
+          <path class="skin" d="M43 47v7q7 5 14 0v-8Z"/>
+          <path class="skin" d="M33 22q4-12 18-12t18 13v20q-5 12-18 12T33 43Z"/>
+          <path class="hair" d="M33 28q0-19 18-19 16 0 19 16l-6 5-4-8q-12 6-27 1Z"/>
+          <circle class="eye" cx="44" cy="35" r="1.8"/><circle class="eye" cx="57" cy="35" r="1.8"/>
+          <path d="M47 44q4 3 8 0" fill="none" stroke="#7c3d31" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- casco -->
+          <path class="metal ${helmet ? 'equipped-glow' : ''}" d="M29 27q2-19 22-20 19 2 21 20H29Z"/>
+          <path d="M25 28h51v7H25Z" fill="#bd9445" stroke="#ffe39b" stroke-opacity=".45" stroke-width="1.2"/>
+          <path d="M33 19q17-9 34 1" fill="none" stroke="#fff5c8" stroke-opacity=".28" stroke-width="2"/>
+          <!-- lámpara -->
+          <circle class="lamp" cx="51" cy="27" r="3.5"/><circle cx="51" cy="27" r="13" fill="url(#minerLight)" opacity=".35"/>
+          <!-- pico en la espalda -->
+          <path class="pickaxe-handle" d="M72 66l17 30"/><path class="pickaxe" d="M80 66q8-8 15 0"/>
+          <!-- guantes -->
+          <circle cx="26" cy="82" r="3.5" fill="#6c4b31"/><circle cx="75" cy="82" r="3.5" fill="#6c4b31"/>
+        </g>
+      </svg>
+      <div class="player-weapon ${weapon ? 'has-weapon' : ''}" title="${weapon?.name || 'Sin arma'}">${weapon ? itemVisuals.itemIcon(weapon, {size: 30, className: 'player-weapon-svg'}) : ''}</div>
     </div>
   `;
 }
