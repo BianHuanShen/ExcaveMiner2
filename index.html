@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>⛏️ El Minero del Abismo</title>
+
+    <!-- ========================================================
+         ESTILOS
+         ======================================================== -->
+    <link rel="stylesheet" href="css/01-core.css">
+    <link rel="stylesheet" href="css/02-layout.css">
+    <link rel="stylesheet" href="css/03-controls.css">
+    <link rel="stylesheet" href="css/04-panels.css">
+    <link rel="stylesheet" href="css/05-inventory.css">
+    <link rel="stylesheet" href="css/06-modals.css">
+    <link rel="stylesheet" href="css/07-animations.css">
+    <link rel="stylesheet" href="css/08-responsive.css">
+</head>
+
+<body>
+
+    <!-- ========================================================
+         JUEGO
+         ======================================================== -->
+    <div id="game">
+
+
+        <!-- ====================================================
+             ACCESO / USUARIO / PARTIDAS
+             ==================================================== -->
+        <div id="start-screen" class="screen">
+
+            <!-- ==================== AUTENTICACIÓN ==================== -->
+            <section id="auth-view" class="start-view auth-view">
+
+                <h1>⛏️ EL MINERO DEL ABISMO</h1>
+
+                <p class="subtitle">
+                    Excava. Descubre. Sobrevive.
+                </p>
+
+                <div class="auth-box">
+
+                    <div class="auth-tabs">
+
+                        <button
+                            type="button"
+                            class="auth-tab active"
+                            data-auth="login">
+                            🔐 Iniciar sesión
+                        </button>
+
+                        <button
+                            type="button"
+                            class="auth-tab"
+                            data-auth="register">
+                            🧑 Crear usuario
+                        </button>
+
+                    </div>
+
+
+                    <!-- ---------- FORMULARIO LOGIN ---------- -->
+                    <form id="login-form" class="auth-form">
+
+                        <input
+                            id="login-username"
+                            type="text"
+                            maxlength="20"
+                            placeholder="Usuario"
+                            autocomplete="username"
+                            required>
+
+                        <input
+                            id="login-password"
+                            type="password"
+                            placeholder="Contraseña"
+                            autocomplete="current-password"
+                            required>
+
+                        <button
+                            class="big-btn"
+                            type="submit">
+                            ▶ Entrar
+                        </button>
+
+                    </form>
+
+
+                    <!-- ---------- FORMULARIO REGISTRO ---------- -->
+                    <form
+                        id="register-form"
+                        class="auth-form hidden">
+
+                        <input
+                            id="register-username"
+                            type="text"
+                            maxlength="20"
+                            placeholder="Usuario (3-20 caracteres)"
+                            autocomplete="username"
+                            required>
+
+                        <input
+                            id="register-password"
+                            type="password"
+                            placeholder="Contraseña (mínimo 4 caracteres)"
+                            autocomplete="new-password"
+                            required>
+
+                        <input
+                            id="register-confirm"
+                            type="password"
+                            placeholder="Repetir contraseña"
+                            autocomplete="new-password"
+                            required>
+
+                        <button
+                            class="big-btn"
+                            type="submit">
+                            ⛏️ Crear cuenta
+                        </button>
+
+                    </form>
+
+
+                    <p
+                        id="auth-message"
+                        class="auth-message">
+                    </p>
+
+                    <small class="local-account-note">
+                        Las cuentas se guardan en este navegador.
+                    </small>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================== PARTIDAS ==================== -->
+            <section
+                id="slots-view"
+                class="start-view hidden slots-view">
+
+                <h1>⛏️ EL MINERO DEL ABISMO</h1>
+
+                <p class="subtitle">
+                    Bienvenido,
+                    <strong id="logged-user"></strong>
+                </p>
+
+                <h2>💾 Selecciona tu partida</h2>
+
+
+                <div class="save-slots">
+
+                    <!-- ---------- RANURA 1 ---------- -->
+                    <div
+                        class="save-slot"
+                        data-slot-card="0">
+
+                        <h3 class="slot-title">
+                            Ranura 1
+                        </h3>
+
+                        <p class="slot-info">
+                            Ranura 1 — Vacía
+                        </p>
+
+                        <div class="slot-actions">
+
+                            <button
+                                type="button"
+                                class="slot-load">
+                                ▶ Continuar
+                            </button>
+
+                            <button
+                                type="button"
+                                class="slot-new">
+                                ⛏️ Nueva partida
+                            </button>
+
+                            <button
+                                type="button"
+                                class="slot-delete">
+                                🗑️ Borrar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ---------- RANURA 2 ---------- -->
+                    <div
+                        class="save-slot"
+                        data-slot-card="1">
+
+                        <h3 class="slot-title">
+                            Ranura 2
+                        </h3>
+
+                        <p class="slot-info">
+                            Ranura 2 — Vacía
+                        </p>
+
+                        <div class="slot-actions">
+
+                            <button
+                                type="button"
+                                class="slot-load">
+                                ▶ Continuar
+                            </button>
+
+                            <button
+                                type="button"
+                                class="slot-new">
+                                ⛏️ Nueva partida
+                            </button>
+
+                            <button
+                                type="button"
+                                class="slot-delete">
+                                🗑️ Borrar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ---------- RANURA 3 ---------- -->
+                    <div
+                        class="save-slot"
+                        data-slot-card="2">
+
+                        <h3 class="slot-title">
+                            Ranura 3
+                        </h3>
+
+                        <p class="slot-info">
+                            Ranura 3 — Vacía
+                        </p>
+
+                        <div class="slot-actions">
+
+                            <button
+                                type="button"
+                                class="slot-load">
+                                ▶ Continuar
+                            </button>
+
+                            <button
+                                type="button"
+                                class="slot-new">
+                                ⛏️ Nueva partida
+                            </button>
+
+                            <button
+                                type="button"
+                                class="slot-delete">
+                                🗑️ Borrar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="slots-logout-btn"
+                    type="button"
+                    class="secondary-start-btn">
+                    ↩ Cerrar sesión
+                </button>
+
+            </section>
+
+
+            <!-- ==================== DIFICULTAD ==================== -->
+            <section
+                id="difficulty-view"
+                class="start-view hidden difficulty-view">
+
+                <h1>⚔️ ELIGE LA DIFICULTAD</h1>
+
+                <p class="subtitle">
+                    Nueva partida ·
+                    <strong id="difficulty-slot"></strong>
+                </p>
+
+                <div class="difficulty-select">
+
+                    <button
+                        type="button"
+                        class="diff-btn"
+                        data-diff="facil">
+                        😌 Fácil
+                    </button>
+
+                    <button
+                        type="button"
+                        class="diff-btn"
+                        data-diff="normal">
+                        ⚔️ Normal
+                    </button>
+
+                    <button
+                        type="button"
+                        class="diff-btn"
+                        data-diff="dificil">
+                        💀 Difícil
+                    </button>
+
+                </div>
+
+                <button
+                    id="difficulty-back"
+                    type="button"
+                    class="secondary-start-btn">
+                    ← Volver a partidas
+                </button>
+
+            </section>
+
+        </div>
+
+
+        <!-- ====================================================
+             HUD PRINCIPAL
+             ==================================================== -->
+        <div id="hud" class="hidden">
+
+            <!-- ==================== VIDA / ENERGÍA ==================== -->
+            <div class="hud-row">
+
+                <div class="stat">
+
+                    <span class="label">
+                        ❤️ Vida
+                    </span>
+
+                    <div class="bar">
+                        <div
+                            id="hp-fill"
+                            class="fill hp">
+                        </div>
+                    </div>
+
+                    <span
+                        id="hp-text"
+                        class="value">
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span class="label">
+                        ⚡ Energía
+                    </span>
+
+                    <div class="bar">
+                        <div
+                            id="energy-fill"
+                            class="fill energy">
+                        </div>
+                    </div>
+
+                    <span
+                        id="energy-text"
+                        class="value">
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================== NIVEL / ORO ==================== -->
+            <div class="hud-row">
+
+                <div class="stat">
+
+                    <span class="label">
+                        ⭐ Nivel
+                        <span id="level-text"></span>
+                    </span>
+
+                    <div class="bar">
+                        <div
+                            id="xp-fill"
+                            class="fill xp">
+                        </div>
+                    </div>
+
+                    <span
+                        id="xp-text"
+                        class="value">
+                    </span>
+
+                </div>
+
+
+                <div class="stat-simple">
+                    💰
+                    <span id="gold-text">0</span>
+                </div>
+
+            </div>
+
+
+            <!-- ==================== INFORMACIÓN / ACCIONES ==================== -->
+            <div class="hud-row small">
+
+                <span id="pickaxe-text"></span>
+
+                <span id="pos-text"></span>
+
+                <span id="diff-text"></span>
+
+
+                <span class="hud-user-actions">
+
+                    <button
+                        id="slot-menu-btn"
+                        type="button">
+                        💾 Partidas
+                    </button>
+
+                    <button
+                        id="logout-btn"
+                        type="button">
+                        ↩ Salir
+                    </button>
+
+                    <button
+                        id="reset-btn"
+                        type="button"
+                        class="hidden">
+                        🗑️ Reiniciar partida
+                    </button>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================================
+             MAPA
+             ==================================================== -->
+        <div
+            id="map-container"
+            class="hidden">
+
+            <div id="map-grid"></div>
+
+        </div>
+
+
+        <!-- ====================================================
+             REGISTRO DE MENSAJES
+             ==================================================== -->
+        <div
+            id="log"
+            class="hidden">
+        </div>
+
+
+        <!-- ====================================================
+             CONTROLES DE EXCAVACIÓN
+             ==================================================== -->
+        <div
+            id="controls"
+            class="hidden">
+
+            <div class="dpad">
+
+                <button
+                    id="dig-up"
+                    class="dig-btn"
+                    type="button">
+                    ⛏️ ↑
+                </button>
+
+
+                <div class="dpad-mid">
+
+                    <button
+                        id="dig-left"
+                        class="dig-btn"
+                        type="button">
+                        ⛏️ ←
+                    </button>
+
+                    <button
+                        id="go-home"
+                        class="dig-btn home"
+                        type="button">
+                        🏠
+                    </button>
+
+                    <button
+                        id="dig-right"
+                        class="dig-btn"
+                        type="button">
+                        ⛏️ →
+                    </button>
+
+                </div>
+
+
+                <button
+                    id="dig-down"
+                    class="dig-btn"
+                    type="button">
+                    ⛏️ ↓
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================================
+             PANEL INFERIOR — PESTAÑAS
+             ==================================================== -->
+        <div
+            id="bottom-tabs"
+            class="hidden">
+
+            <button
+                type="button"
+                class="tab-btn"
+                data-tab="inventory">
+                🎒 Mochila
+            </button>
+
+            <button
+                type="button"
+                class="tab-btn"
+                data-tab="shelter">
+                🏠 Refugio
+            </button>
+
+            <button
+                type="button"
+                class="tab-btn"
+                data-tab="shop">
+                🪙 Tienda
+            </button>
+
+            <button
+                type="button"
+                class="tab-btn"
+                data-tab="crafting">
+                🔨 Fabricar
+            </button>
+
+        </div>
+
+
+        <!-- ====================================================
+             PANEL — INVENTARIO
+             ==================================================== -->
+        <div
+            id="panel-inventory"
+            class="panel hidden">
+
+            <h3>
+                🎒 Mochila
+                <span id="bag-capacity"></span>
+            </h3>
+
+            <div id="inventory-list"></div>
+
+        </div>
+
+
+        <!-- ====================================================
+             PANEL — REFUGIO
+             ==================================================== -->
+        <div
+            id="panel-shelter"
+            class="panel hidden">
+
+            <h3>
+                🛏️ Refugio del Minero
+            </h3>
+
+            <p>
+                Aquí puedes recuperar fuerzas antes de volver al Abismo.
+            </p>
+
+            <button
+                id="sleep-btn"
+                class="action-btn"
+                type="button">
+                😴 Dormir (recupera vida y energía)
+            </button>
+
+        </div>
+
+
+        <!-- ====================================================
+             PANEL — FABRICACIÓN
+             ==================================================== -->
+        <div
+            id="panel-crafting"
+            class="panel hidden">
+
+            <h3>
+                🔨 Taller del Minero
+            </h3>
+
+            <p>
+                Convierte materiales encontrados en componentes y equipamiento.
+            </p>
+
+            <div id="craft-list"></div>
+
+        </div>
+
+
+        <!-- ====================================================
+             PANEL — TIENDA
+             ==================================================== -->
+        <div
+            id="panel-shop"
+            class="panel hidden">
+
+            <h3>
+                🪙 Mercader
+            </h3>
+
+
+            <div class="shop-section">
+
+                <h4>
+                    Vender tesoros
+                </h4>
+
+                <div id="sell-list"></div>
+
+            </div>
+
+
+            <div class="shop-section">
+
+                <h4>
+                    Mejorar pico
+                </h4>
+
+                <div id="pickaxe-shop"></div>
+
+            </div>
+
+
+            <div class="shop-section">
+
+                <h4>
+                    Mochila y pociones
+                </h4>
+
+                <div id="other-shop"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================================
+             POPUP DE TESORO
+             ==================================================== -->
+        <div
+            id="treasure-popup"
+            class="treasure-popup hidden">
+
+            <div class="treasure-card">
+
+                <div
+                    id="treasure-rarity"
+                    class="treasure-rarity">
+                </div>
+
+                <div
+                    id="treasure-icon"
+                    class="treasure-icon">
+                    💎
+                </div>
+
+                <h2 id="treasure-name">
+                    Tesoro encontrado
+                </h2>
+
+                <p id="treasure-description"></p>
+
+                <div
+                    id="treasure-reward"
+                    class="treasure-reward">
+                </div>
+
+                <button
+                    id="treasure-close"
+                    class="action-btn"
+                    type="button">
+                    Continuar excavando
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================================
+             CATÁLOGO DE OBJETOS — TECLA L
+             ==================================================== -->
+        <div
+            id="item-codex"
+            class="item-codex hidden"
+            aria-hidden="true">
+
+            <div
+                class="item-codex-window"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="codex-title">
+
+
+                <!-- ---------- CABECERA DEL CATÁLOGO ---------- -->
+                <header class="item-codex-header">
+
+                    <div>
+
+                        <h2 id="codex-title">
+                            📖 Catálogo del Minero
+                        </h2>
+
+                        <p>
+                            Todos los objetos del juego y las recetas de fabricación.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="codex-close"
+                        type="button"
+                        aria-label="Cerrar catálogo">
+                        ✕
+                    </button>
+
+                </header>
+
+
+                <!-- ---------- CONTENIDO DEL CATÁLOGO ---------- -->
+                <div class="item-codex-content">
+
+
+                    <!-- OBJETOS -->
+                    <section>
+
+                        <h2>
+                            📦 Objetos existentes
+                        </h2>
+
+                        <div id="codex-items"></div>
+
+                    </section>
+
+
+                    <!-- RECETAS -->
+                    <section class="codex-recipes-section">
+
+                        <h2>
+                            🔨 Cómo fabricar
+                        </h2>
+
+                        <div id="codex-recipes"></div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         JAVASCRIPT
+         Los archivos se cargan en orden de dependencia.
+         ======================================================== -->
+
+
+    <!-- ========================================================
+         DATOS
+         Añadir nuevos objetos aquí.
+         ======================================================== -->
+    <script src="js/data/consumables.js"></script>
+    <script src="js/data/equipment.js"></script>
+    <script src="js/data/sellables.js"></script>
+    <script src="js/data/crafting.js"></script>
+    <script src="js/data/items.js"></script>
+    <script src="js/data/config.js"></script>
+
+
+    <!-- ========================================================
+         SISTEMAS DE INVENTARIO Y EQUIPAMIENTO
+         ======================================================== -->
+    <script src="js/systems/inventory.js"></script>
+    <script src="js/systems/equipment.js"></script>
+    <script src="js/systems/itemActions.js"></script>
+    <script src="js/systems/economy.js"></script>
+
+
+    <!-- ========================================================
+         SISTEMAS DEL JUEGO
+         ======================================================== -->
+    <script src="js/systems/state.js"></script>
+    <script src="js/systems/users.js"></script>
+    <script src="js/systems/save.js"></script>
+    <script src="js/systems/utils.js"></script>
+    <script src="js/systems/progression.js"></script>
+    <script src="js/systems/mining.js"></script>
+    <script src="js/systems/shop.js"></script>
+    <script src="js/systems/crafting.js"></script>
+    <script src="js/systems/cheats.js"></script>
+
+
+    <!-- ========================================================
+         INTERFAZ
+         ======================================================== -->
+    <script src="js/ui/treasure.js"></script>
+    <script src="js/ui/render.js"></script>
+    <script src="js/ui/tabs.js"></script>
+    <script src="js/ui/init.js"></script>
+    <script src="js/ui/catalog.js"></script>
+
+
+    <!-- ========================================================
+         NÚCLEO DEL JUEGO
+         ======================================================== -->
+    <script src="js/game.js"></script>
+
+
+    <!-- ========================================================
+         BOTONES / CONTROLES
+         ======================================================== -->
+    <script src="js/but/buttons.js"></script>
+
+</body>
+
+</html>
