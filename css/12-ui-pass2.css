@@ -1,0 +1,704 @@
+/*
+============================================================
+ EL MINERO DEL ABISMO — UI RESPONSIVE PASS 2
+ Inventario / Tienda / Crafting / Catálogo
+------------------------------------------------------------
+ SOLO CSS. No modifica HTML ni JavaScript.
+ Debe cargarse DESPUÉS de los demás CSS.
+============================================================
+*/
+
+:root{
+  --ui-gap: clamp(6px, 1vw, 10px);
+  --ui-pad: clamp(8px, 1.5vw, 14px);
+  --ui-radius: 9px;
+  --ui-control-h: 42px;
+}
+
+/* ==========================================================
+   1. REGLAS GLOBALES DE CONTENCIÓN
+========================================================== */
+#game-modal-window,
+.item-codex-window,
+.panel,
+#panel-inventory,
+#panel-shop,
+#panel-crafting,
+#inventory-list,
+#craft-list,
+#pickaxe-shop,
+#other-shop,
+.item-codex-content,
+.codex-item-grid,
+#codex-recipes{
+  box-sizing:border-box;
+  min-width:0;
+  max-width:100%;
+}
+
+#game-modal-window,
+.item-codex-window{
+  width:min(94vw, 720px);
+  max-width:720px;
+  max-height:min(88dvh, 760px);
+  overflow:hidden;
+}
+
+#game-modal-content,
+.item-codex-content{
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+
+.panel{
+  width:100%;
+  max-height:100%;
+  overflow-x:hidden;
+}
+
+.panel button,
+.shop-item button,
+.craft-item button,
+.item-action-btn{
+  min-height:var(--ui-control-h);
+  min-width:40px;
+  max-width:100%;
+  box-sizing:border-box;
+  touch-action:manipulation;
+}
+
+/* ==========================================================
+   2. INVENTARIO — COMPACTO
+========================================================== */
+#panel-inventory{
+  padding:var(--ui-pad);
+}
+
+#inventory-list{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fill, minmax(104px, 1fr)) !important;
+  gap:var(--ui-gap) !important;
+  align-items:stretch;
+  width:100%;
+  max-height:min(62dvh, 540px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:2px;
+}
+
+#inventory-list .inv-item{
+  display:grid;
+  grid-template-rows:auto auto auto auto;
+  align-content:start;
+  justify-items:center;
+  gap:3px;
+  min-width:0;
+  min-height:118px;
+  padding:8px 6px !important;
+  border-radius:var(--ui-radius);
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+#inventory-list .inv-item .item-icon{
+  width:100%;
+  min-height:34px;
+  display:grid;
+  place-items:center;
+  font-size:clamp(1.55rem, 5vw, 2rem) !important;
+  line-height:1;
+}
+
+#inventory-list .inv-item .item-name{
+  width:100%;
+  min-width:0;
+  font-size:clamp(.68rem, 1.8vw, .78rem) !important;
+  line-height:1.12;
+  text-align:center;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+
+#inventory-list .inv-item .item-qty,
+#inventory-list .inv-item .item-rarity{
+  max-width:100%;
+  font-size:.62rem !important;
+  line-height:1.1;
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#inventory-list .inv-item .inv-actions{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:4px;
+  margin-top:auto;
+}
+
+#inventory-list .item-action-btn{
+  width:100%;
+  min-height:40px;
+  padding:4px 3px !important;
+  font-size:.61rem !important;
+  line-height:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* Equipamiento no debe inflar el inventario */
+#inventory-list .equipment-panel{
+  grid-column:1 / -1;
+  min-width:0;
+}
+
+.equipment-grid{
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:7px !important;
+}
+
+.equipment-slot{
+  min-width:0;
+}
+
+.equipment-slot-item{
+  min-width:0;
+  overflow:hidden;
+}
+
+/* ==========================================================
+   3. TIENDA — UNA TARJETA = UNA UNIDAD COMPACTA
+========================================================== */
+#panel-shop{
+  width:100%;
+  max-height:min(82dvh, 680px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:var(--ui-pad) !important;
+}
+
+#panel-shop .shop-section{
+  width:100%;
+  min-width:0;
+  margin:0 0 10px !important;
+  padding:7px !important;
+  box-sizing:border-box;
+}
+
+#pickaxe-shop,
+#other-shop{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)) !important;
+  gap:7px !important;
+  width:100%;
+  min-width:0;
+}
+
+#pickaxe-shop > *,
+#other-shop > *{
+  min-width:0;
+  max-width:100%;
+}
+
+.shop-item{
+  display:grid !important;
+  grid-template-columns:38px minmax(0, 1fr) !important;
+  grid-template-rows:auto auto !important;
+  align-items:center;
+  gap:4px 7px !important;
+  min-width:0;
+  min-height:78px;
+  padding:7px !important;
+  border-radius:8px;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+.shop-item .shop-visual{
+  grid-row:1 / -1;
+  min-width:0;
+  display:grid !important;
+  place-items:center;
+}
+
+.shop-item .shop-icon{
+  font-size:1.55rem !important;
+  line-height:1;
+}
+
+.shop-item .shop-info{
+  min-width:0;
+  overflow:hidden;
+}
+
+.shop-item .shop-name{
+  display:block;
+  max-width:100%;
+  font-size:.72rem !important;
+  line-height:1.12;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.shop-item .shop-rarity{
+  display:block;
+  max-width:100%;
+  font-size:.59rem !important;
+  line-height:1.1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.shop-item button{
+  grid-column:2;
+  width:100%;
+  min-height:38px;
+  padding:5px 6px !important;
+  font-size:.64rem !important;
+  line-height:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* ==========================================================
+   4. CRAFTING — EVITA TARJETAS ALTAS
+========================================================== */
+#panel-crafting{
+  width:100%;
+  max-height:min(82dvh, 680px);
+  overflow:hidden;
+  padding:var(--ui-pad) !important;
+}
+
+#craft-list{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fill, minmax(155px, 1fr)) !important;
+  gap:7px !important;
+  width:100%;
+  max-height:min(68dvh, 560px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:2px;
+}
+
+#craft-list .craft-item{
+  display:grid !important;
+  grid-template-columns:38px minmax(0, 1fr) !important;
+  grid-template-rows:auto auto !important;
+  align-items:center;
+  gap:4px 7px !important;
+  min-width:0;
+  min-height:82px;
+  padding:7px !important;
+  border-radius:8px;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+#craft-list .craft-visual{
+  grid-row:1 / -1;
+  min-width:0;
+  display:grid !important;
+  place-items:center;
+}
+
+#craft-list .craft-icon{
+  font-size:1.55rem !important;
+  line-height:1;
+}
+
+#craft-list .craft-info{
+  min-width:0;
+  overflow:hidden;
+}
+
+#craft-list .craft-name{
+  max-width:100%;
+  font-size:.72rem !important;
+  line-height:1.12;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#craft-list .craft-rarity{
+  max-width:100%;
+  font-size:.59rem !important;
+  line-height:1.1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#craft-list .craft-info small{
+  display:block;
+  max-width:100%;
+  margin-top:2px;
+  font-size:.58rem !important;
+  line-height:1.1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#craft-list .craft-item > button,
+#craft-list .craft-item button{
+  grid-column:2;
+  width:100%;
+  min-height:38px;
+  padding:5px 6px !important;
+  font-size:.63rem !important;
+  line-height:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* ==========================================================
+   5. CATÁLOGO / CODEX — MÁS DENSIDAD, MENOS DESPERDICIO
+========================================================== */
+.item-codex-window{
+  width:min(94vw, 900px);
+  max-width:900px;
+  max-height:90dvh;
+}
+
+.item-codex-content{
+  padding:clamp(8px, 1.5vw, 16px) !important;
+}
+
+.codex-item-grid,
+#codex-recipes{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fill, minmax(190px, 1fr)) !important;
+  gap:8px !important;
+  align-items:stretch;
+}
+
+.codex-item{
+  display:grid;
+  grid-template-columns:40px minmax(0, 1fr);
+  gap:8px;
+  min-width:0;
+  min-height:82px;
+  padding:8px !important;
+  border-radius:8px;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+.codex-item-icon{
+  width:40px;
+  min-width:40px;
+  font-size:1.55rem !important;
+  line-height:1;
+  display:grid;
+  place-items:center;
+}
+
+.codex-item-body{
+  min-width:0;
+  overflow:hidden;
+}
+
+.codex-item-title{
+  min-width:0;
+  font-size:.76rem !important;
+  line-height:1.15;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.codex-item-title span{
+  font-size:.62rem !important;
+}
+
+.codex-item-body p{
+  max-height:3.25em;
+  margin:4px 0 !important;
+  font-size:.64rem !important;
+  line-height:1.08;
+  overflow:hidden;
+}
+
+.codex-item-body small{
+  font-size:.58rem !important;
+  line-height:1.08;
+}
+
+/* ==========================================================
+   6. MÓVIL PEQUEÑO <= 600px
+========================================================== */
+@media (max-width:600px){
+  #game-modal-window,
+  .item-codex-window{
+    width:calc(100vw - 14px);
+    max-width:none;
+    max-height:calc(100dvh - 14px);
+    border-radius:10px;
+  }
+
+  #game-modal-content,
+  .item-codex-content{
+    max-height:calc(100dvh - 95px);
+  }
+
+  #inventory-list{
+    grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+    gap:5px !important;
+    max-height:calc(100dvh - 190px);
+  }
+
+  #inventory-list .inv-item{
+    min-height:105px;
+    padding:6px 4px !important;
+  }
+
+  #inventory-list .inv-item .item-icon{
+    font-size:1.45rem !important;
+  }
+
+  #inventory-list .inv-item .item-name{
+    font-size:.63rem !important;
+  }
+
+  #inventory-list .inv-item .item-qty,
+  #inventory-list .inv-item .item-rarity{
+    font-size:.55rem !important;
+  }
+
+  #inventory-list .inv-item .inv-actions{
+    gap:3px;
+  }
+
+  #inventory-list .item-action-btn{
+    min-height:38px;
+    font-size:.55rem !important;
+    padding:3px 2px !important;
+  }
+
+  #pickaxe-shop,
+  #other-shop{
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+    gap:5px !important;
+  }
+
+  .shop-item{
+    min-height:73px;
+    grid-template-columns:32px minmax(0, 1fr) !important;
+    gap:3px 5px !important;
+    padding:6px !important;
+  }
+
+  .shop-item .shop-icon{
+    font-size:1.3rem !important;
+  }
+
+  .shop-item .shop-name{font-size:.63rem !important}
+  .shop-item .shop-rarity{font-size:.52rem !important}
+  .shop-item button{
+    min-height:36px;
+    font-size:.55rem !important;
+  }
+
+  #craft-list{
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+    gap:5px !important;
+    max-height:calc(100dvh - 180px);
+  }
+
+  #craft-list .craft-item{
+    min-height:76px;
+    grid-template-columns:32px minmax(0, 1fr) !important;
+    gap:3px 5px !important;
+    padding:6px !important;
+  }
+
+  #craft-list .craft-icon{font-size:1.3rem !important}
+  #craft-list .craft-name{font-size:.63rem !important}
+  #craft-list .craft-rarity{font-size:.52rem !important}
+  #craft-list .craft-info small{font-size:.5rem !important}
+  #craft-list .craft-item > button,
+  #craft-list .craft-item button{
+    min-height:36px;
+    font-size:.55rem !important;
+  }
+
+  .codex-item-grid,
+  #codex-recipes{
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+    gap:5px !important;
+  }
+
+  .codex-item{
+    grid-template-columns:32px minmax(0, 1fr);
+    gap:5px;
+    min-height:72px;
+    padding:6px !important;
+  }
+
+  .codex-item-icon{
+    width:32px;
+    min-width:32px;
+    font-size:1.3rem !important;
+  }
+
+  .codex-item-title{font-size:.64rem !important}
+  .codex-item-title span{font-size:.53rem !important}
+  .codex-item-body p{font-size:.54rem !important}
+  .codex-item-body small{font-size:.5rem !important}
+}
+
+/* ==========================================================
+   7. TELÉFONOS MUY PEQUEÑOS <= 380px
+========================================================== */
+@media (max-width:380px){
+  #inventory-list{
+    grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  #inventory-list .inv-item{
+    min-height:99px;
+    padding:5px 3px !important;
+  }
+
+  #inventory-list .item-action-btn{
+    min-height:36px;
+    font-size:.51rem !important;
+  }
+
+  #pickaxe-shop,
+  #other-shop,
+  #craft-list,
+  .codex-item-grid,
+  #codex-recipes{
+    grid-template-columns:1fr 1fr !important;
+  }
+}
+
+/* ==========================================================
+   8. TABLET 601–1024px
+========================================================== */
+@media (min-width:601px) and (max-width:1024px){
+  #game-modal-window{
+    width:min(88vw, 700px);
+    max-height:84dvh;
+  }
+
+  #inventory-list{
+    grid-template-columns:repeat(auto-fill, minmax(105px, 1fr)) !important;
+  }
+
+  #pickaxe-shop,
+  #other-shop{
+    grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  #craft-list{
+    grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .codex-item-grid,
+  #codex-recipes{
+    grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ==========================================================
+   9. LANDSCAPE — PROTEGER LA VISTA DEL JUEGO
+========================================================== */
+@media (orientation:landscape) and (max-height:600px){
+  #game-modal-window,
+  .item-codex-window{
+    width:min(86vw, 820px);
+    max-height:94dvh;
+  }
+
+  #game-modal-content,
+  .item-codex-content{
+    max-height:calc(94dvh - 70px);
+  }
+
+  #inventory-list,
+  #craft-list{
+    max-height:calc(94dvh - 125px);
+  }
+
+  #inventory-list{
+    grid-template-columns:repeat(5, minmax(0, 1fr)) !important;
+  }
+
+  #pickaxe-shop,
+  #other-shop{
+    grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  #craft-list{
+    grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  .codex-item-grid,
+  #codex-recipes{
+    grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ==========================================================
+   10. DESKTOP — NO AGRANDAR ARTIFICIALMENTE
+========================================================== */
+@media (min-width:1025px){
+  #game-modal-window{width:min(68vw, 760px)}
+  .item-codex-window{width:min(78vw, 960px)}
+
+  #inventory-list{
+    grid-template-columns:repeat(auto-fill, minmax(112px, 1fr)) !important;
+  }
+
+  #pickaxe-shop,
+  #other-shop{
+    grid-template-columns:repeat(auto-fill, minmax(175px, 1fr)) !important;
+  }
+
+  #craft-list{
+    grid-template-columns:repeat(auto-fill, minmax(175px, 1fr)) !important;
+  }
+}
+
+/* ==========================================================
+   11. ACCESIBILIDAD / TOUCH
+========================================================== */
+@media (pointer:coarse){
+  #inventory-list button,
+  #pickaxe-shop button,
+  #other-shop button,
+  #craft-list button,
+  .item-action-btn{
+    touch-action:manipulation;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  #inventory-list *,
+  #pickaxe-shop *,
+  #other-shop *,
+  #craft-list *,
+  .codex-item-grid *{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
