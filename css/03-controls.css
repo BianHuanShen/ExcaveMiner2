@@ -300,10 +300,10 @@
   outline: 2px solid #ffe09a;
   outline-offset: 2px;
 }
-@media (max-width: 520px) {
+/*@media (max-width: 520px) {
   .dpad {
     grid-template-columns: repeat(3, 44px);
     grid-template-rows: repeat(3, 44px);
     gap: 4px;
   }
-}
+}*/
