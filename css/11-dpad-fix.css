@@ -1,0 +1,127 @@
+/* =============================================================
+   EL MINERO DEL ABISMO — D-PAD TÁCTIL FINAL
+   Corrección de visibilidad, grid 3x3, apilamiento y toque móvil.
+   Este archivo se carga al final para neutralizar overrides
+   responsive anteriores sin modificar la lógica del juego.
+   ============================================================= */
+
+#controls {
+  position: fixed !important;
+  z-index: 9999 !important;
+  right: max(8px, env(safe-area-inset-right)) !important;
+  bottom: max(8px, env(safe-area-inset-bottom)) !important;
+  width: clamp(156px, 46vw, 210px) !important;
+  height: clamp(156px, 46vw, 210px) !important;
+  padding: 8px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  pointer-events: auto !important;
+  touch-action: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+.dpad {
+  position: absolute !important;
+  inset: 8px !important;
+  width: auto !important;
+  height: auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(3px, 1vw, 6px) !important;
+  box-sizing: border-box !important;
+  z-index: 10000 !important;
+  touch-action: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.dpad-mid {
+  display: contents !important;
+}
+
+.dpad > .dig-btn {
+  min-width: 0 !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 10001 !important;
+  touch-action: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Posiciones reales de la matriz 3x3 */
+#craft-touch   { grid-column: 1 !important; grid-row: 1 !important; }
+#dig-up        { grid-column: 2 !important; grid-row: 1 !important; }
+#catalog-touch  { grid-column: 3 !important; grid-row: 1 !important; }
+#dig-left      { grid-column: 1 !important; grid-row: 2 !important; }
+#go-home       { grid-column: 2 !important; grid-row: 2 !important; }
+#dig-right     { grid-column: 3 !important; grid-row: 2 !important; }
+#dig-down       { grid-column: 2 !important; grid-row: 3 !important; }
+
+/* Los botones nuevos tenían font-size:0 pero no tenían contenido
+   en ::after; por eso podían quedar completamente invisibles. */
+#craft-touch::after {
+  content: "🔨" !important;
+  display: block !important;
+  font-size: clamp(18px, 5vw, 27px) !important;
+  line-height: 1 !important;
+}
+
+#catalog-touch::after {
+  content: "📖" !important;
+  display: block !important;
+  font-size: clamp(18px, 5vw, 27px) !important;
+  line-height: 1 !important;
+}
+
+#craft-touch,
+#catalog-touch {
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+}
+
+/* Feedback táctil */
+#craft-touch:active,
+#catalog-touch:active {
+  transform: translateY(2px) scale(.97) !important;
+}
+
+@media (max-width: 360px) {
+  #controls {
+    width: 156px !important;
+    height: 156px !important;
+    padding: 7px !important;
+  }
+
+  .dpad {
+    inset: 7px !important;
+    gap: 3px !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  #controls {
+    width: 156px !important;
+    height: 156px !important;
+  }
+}
+
+@media (pointer: coarse) {
+  #controls,
+  .dpad,
+  .dpad > .dig-btn {
+    touch-action: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
+}
