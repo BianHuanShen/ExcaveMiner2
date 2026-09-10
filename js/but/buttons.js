@@ -59,8 +59,7 @@
       miniControls.appendChild(controls);
 
       /*
-         Quitamos hidden porque ahora los controles
-         viven permanentemente en la parte superior.
+         Los controles del D-Pad permanecen visibles.
       */
 
       controls.classList.remove("hidden");
@@ -68,77 +67,17 @@
     }
 
     /* =====================================================
-       CREAR BOTONES RÁPIDOS
+       REFERENCIAS A LOS NUEVOS BOTONES DEL D-PAD
        ===================================================== */
 
-    const quickActions = document.createElement("div");
+    const inventoryButton =
+      document.getElementById("inventory-touch");
 
-    quickActions.id = "quick-actions";
+    const shopButton =
+      document.getElementById("shop-touch");
 
-    /*
-       MOCHILA
-    */
-
-    const backpackButton = document.createElement("button");
-
-    backpackButton.className = "quick-action-btn";
-
-    backpackButton.type = "button";
-
-    backpackButton.textContent = "🎒";
-
-    backpackButton.title = "Abrir mochila";
-
-    backpackButton.setAttribute(
-      "aria-label",
-      "Abrir mochila"
-    );
-
-    /*
-       TIENDA
-    */
-
-    const shopButton = document.createElement("button");
-
-    shopButton.className = "quick-action-btn";
-
-    shopButton.type = "button";
-
-    shopButton.textContent = "🪙";
-
-    shopButton.title = "Abrir tienda";
-
-    shopButton.setAttribute(
-      "aria-label",
-      "Abrir tienda"
-    );
-
-    /*
-       REFUGIO
-    */
-
-    const shelterButton = document.createElement("button");
-
-    shelterButton.className = "quick-action-btn";
-
-    shelterButton.type = "button";
-
-    shelterButton.textContent = "🏠";
-
-    shelterButton.title = "Abrir refugio";
-
-    shelterButton.setAttribute(
-      "aria-label",
-      "Abrir refugio"
-    );
-
-    quickActions.appendChild(backpackButton);
-
-    quickActions.appendChild(shopButton);
-
-    quickActions.appendChild(shelterButton);
-
-    document.body.appendChild(quickActions);
+    const shelterButton =
+      document.getElementById("go-home");
 
     /* =====================================================
        CREAR MODAL
@@ -214,14 +153,6 @@
 
     modalContent.id = "game-modal-content";
 
-    /*
-       Guardamos el padre original.
-
-       Esto permite restaurar los paneles si fuera necesario.
-    */
-
-    const originalParent = game;
-
     /* =====================================================
        MOVER PANELES AL MODAL
        ===================================================== */
@@ -246,20 +177,12 @@
        MOVER TABS
        ===================================================== */
 
+    modalWindow.appendChild(modalHeader);
+
+    modalWindow.appendChild(modalContent);
+
     if (bottomTabs) {
-
-      modalWindow.appendChild(modalHeader);
-
-      modalWindow.appendChild(modalContent);
-
       modalWindow.appendChild(bottomTabs);
-
-    } else {
-
-      modalWindow.appendChild(modalHeader);
-
-      modalWindow.appendChild(modalContent);
-
     }
 
     modal.appendChild(modalWindow);
@@ -308,9 +231,7 @@
         return;
       }
 
-      /*
-         Ocultar todos
-      */
+      /* Ocultar todos */
 
       [
         inventory,
@@ -327,22 +248,16 @@
 
       });
 
-      /*
-         Mostrar seleccionado
-      */
+      /* Mostrar seleccionado */
 
       panel.classList.remove("hidden");
 
-      /*
-         Cambiar título
-      */
+      /* Cambiar título */
 
       modalTitle.textContent =
         getPanelName(panel);
 
-      /*
-         Activar botón correspondiente
-      */
+      /* Activar botón correspondiente */
 
       if (bottomTabs) {
 
@@ -418,17 +333,8 @@
 
       modalOpen = true;
 
-      /*
-         Evitar scroll de la página
-      */
-
       document.body.style.overflow =
         "hidden";
-
-      /*
-         Actualizar contenido si existen
-         las funciones originales del juego.
-      */
 
       try {
 
@@ -510,43 +416,55 @@
     }
 
     /* =====================================================
-       BOTÓN MOCHILA
+       🎒 NUEVO BOTÓN INVENTARIO DEL D-PAD
        ===================================================== */
 
-    backpackButton.addEventListener(
-      "click",
-      () => {
+    if (inventoryButton) {
 
-        openModal(inventory);
+      inventoryButton.addEventListener(
+        "click",
+        () => {
 
-      }
-    );
+          openModal(inventory);
+
+        }
+      );
+
+    }
 
     /* =====================================================
-       BOTÓN TIENDA
+       🪙 NUEVO BOTÓN TIENDA DEL D-PAD
        ===================================================== */
 
-    shopButton.addEventListener(
-      "click",
-      () => {
+    if (shopButton) {
 
-        openModal(shop);
+      shopButton.addEventListener(
+        "click",
+        () => {
 
-      }
-    );
+          openModal(shop);
+
+        }
+      );
+
+    }
 
     /* =====================================================
-       BOTÓN REFUGIO
+       🏠 BOTÓN REFUGIO DEL D-PAD
        ===================================================== */
 
-    shelterButton.addEventListener(
-      "click",
-      () => {
+    if (shelterButton) {
 
-        openModal(shelter);
+      shelterButton.addEventListener(
+        "click",
+        () => {
 
-      }
-    );
+          openModal(shelter);
+
+        }
+      );
+
+    }
 
     /* =====================================================
        BOTÓN X
@@ -650,9 +568,7 @@
           event.key === "Esc"
         ) {
 
-          /*
-             Primero cerrar tesoro
-          */
+          /* Primero cerrar tesoro */
 
           const treasure =
             document.getElementById(
@@ -681,9 +597,7 @@
 
           }
 
-          /*
-             Después cerrar menú
-          */
+          /* Después cerrar menú */
 
           if (modalOpen) {
 
@@ -695,16 +609,6 @@
 
       }
     );
-
-    /* =====================================================
-       ESCUCHAR CAMBIOS DE INVENTARIO
-       ===================================================== */
-
-    /*
-       Si el juego llama renderInventory(),
-       el panel ya está dentro del modal y
-       seguirá funcionando normalmente.
-    */
 
     /* =====================================================
        EFECTO DE BOTONES
