@@ -39,6 +39,13 @@ function energyCost() {
 function dig(direction, bonusDig = false) {
   if (!state || state.hp <= 0 || state.energy <= 0) return;
 
+  // Bloquea la excavación si el pico está roto o sin durabilidad.
+  if (Number(state.pickaxeDurability || 0) <= 0) {
+    log('⛏️ Tu pico está roto. Debes repararlo antes de seguir excavando.', 'bad');
+    render();
+    return false;
+  }
+
   const cost = energyCost();
   if (state.energy < cost) {
     log('😴 Estás demasiado cansado para seguir excavando. Vuelve al refugio a dormir.', 'bad');
@@ -55,6 +62,7 @@ function dig(direction, bonusDig = false) {
   const mobAtDestination = Array.isArray(state.mobs)
     ? state.mobs.find(mob => mob.x === newPos.x && mob.y === newPos.y)
     : null;
+
   if (mobAtDestination) {
     log('👾 Un enemigo bloquea el paso. Atácalo antes de avanzar.', 'bad');
     render();
@@ -72,6 +80,13 @@ function dig(direction, bonusDig = false) {
   if (!alreadyDug) {
     state.discovered[key] = { dug: true };
     lastDugKey = key;
+
+    // El pico solo pierde durabilidad al romper un bloque nuevo.
+    state.pickaxeDurability = Math.max(0, state.pickaxeDurability - 1);
+
+    if (state.pickaxeDurability <= 0) {
+      log('⛏️ ¡Tu pico se ha roto! Visita la tienda para repararlo.', 'bad');
+    }
   } else {
     lastDugKey = null;
   }
@@ -86,11 +101,6 @@ function dig(direction, bonusDig = false) {
     return;
   }
 
-  state.pickaxeDurability = Math.max(0, state.pickaxeDurability - 1);
-  if (state.pickaxeDurability <= 0) {
-    log('⛏️ ¡Tu pico se ha roto! Visita la tienda para repararlo.', 'bad');
-  }
-
   if (!alreadyDug) {
     const findChance = clamp(60 + pickaxe().damage * 1.2, 60, 90);
     if (roll(findChance)) resolveFind(depth);
@@ -103,6 +113,7 @@ function dig(direction, bonusDig = false) {
   }
 
   render();
+
   if (lastDugKey === key) {
     setTimeout(() => {
       if (lastDugKey === key) lastDugKey = null;
@@ -112,6 +123,7 @@ function dig(direction, bonusDig = false) {
 
   if (!bonusDig && typeof getEquipmentAbility === 'function') {
     const chance = Math.min(0.5, getEquipmentAbility('mineDoubleChance'));
+
     if (chance > 0 && roll(chance * 100) && state.energy > 0) {
       log('🥾 ¡Tus botas permiten excavar un segundo cuadro!', 'good');
       dig(direction, true);
@@ -121,6 +133,7 @@ function dig(direction, bonusDig = false) {
 
   save();
 }
+
 
 // Resuelve roca y mina sin mezclar sus reglas con el movimiento.
 function resolveHazards(depth, direction, diffMult) {
