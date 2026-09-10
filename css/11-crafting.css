@@ -1,0 +1,187 @@
+/* ============================================================
+   11-crafting.css — FABRICACIÓN COMPACTA Y RESPONSIVA
+   Solo presentación/UI. No modifica la lógica de crafting.
+   ============================================================ */
+
+#panel-crafting{
+  width:min(94vw,720px);
+  max-width:94vw;
+  max-height:min(78vh,620px);
+  box-sizing:border-box;
+  overflow:hidden;
+  padding:14px;
+}
+
+#panel-crafting > h3{
+  margin:0 0 6px;
+  font-size:clamp(.9rem,2vw,1.05rem);
+  line-height:1.2;
+}
+
+#panel-crafting > p{
+  margin:4px 0 10px;
+  font-size:clamp(.72rem,1.8vw,.82rem);
+  line-height:1.35;
+  color:#d8e4f2;
+}
+
+#craft-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));
+  gap:7px;
+  width:100%;
+  max-height:calc(min(78vh,620px) - 96px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:2px 4px 4px 0;
+  box-sizing:border-box;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,194,69,.55) rgba(0,0,0,.3);
+  overscroll-behavior:contain;
+}
+
+#craft-list::-webkit-scrollbar{width:6px}
+#craft-list::-webkit-scrollbar-track{background:rgba(0,0,0,.3);border-radius:6px}
+#craft-list::-webkit-scrollbar-thumb{background:rgba(255,194,69,.55);border-radius:6px}
+
+#craft-list .craft-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  min-width:0;
+  min-height:64px;
+  margin:0;
+  padding:7px 8px;
+  box-sizing:border-box;
+  border-radius:9px;
+  overflow:hidden;
+}
+
+#craft-list .craft-visual{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+  flex:1 1 auto;
+}
+
+#craft-list .craft-icon{
+  flex:0 0 38px;
+  width:38px;
+  height:38px;
+  font-size:26px;
+  line-height:1;
+}
+
+#craft-list .craft-info{
+  min-width:0;
+  overflow:hidden;
+}
+
+#craft-list .craft-name{
+  display:block;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:.76rem;
+  line-height:1.2;
+  font-weight:700;
+}
+
+#craft-list .craft-rarity{
+  display:block;
+  margin-top:2px;
+  font-size:.64rem;
+  line-height:1.15;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#craft-list .craft-info small{
+  display:block;
+  margin-top:2px;
+  font-size:.61rem;
+  line-height:1.2;
+  color:#cbd8ea;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+
+#craft-list .craft-item > button,
+#craft-list .craft-item button{
+  flex:0 0 auto;
+  min-width:54px;
+  min-height:44px;
+  max-width:78px;
+  padding:6px 8px;
+  border-radius:7px;
+  font-size:.67rem;
+  line-height:1.1;
+  white-space:normal;
+  touch-action:manipulation;
+}
+
+/* Pantallas medianas: tarjetas ligeramente más anchas. */
+@media (min-width:701px){
+  #craft-list{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+}
+
+/* Móvil: una columna cuando el ancho es muy reducido para priorizar lectura. */
+@media (max-width:520px){
+  #panel-crafting{
+    width:94vw;
+    max-width:94vw;
+    max-height:78vh;
+    padding:11px;
+  }
+
+  #craft-list{
+    grid-template-columns:1fr;
+    gap:6px;
+    max-height:calc(78vh - 92px);
+  }
+
+  #craft-list .craft-item{
+    min-height:58px;
+    padding:6px 7px;
+  }
+
+  #craft-list .craft-icon{
+    flex-basis:36px;
+    width:36px;
+    height:36px;
+    font-size:24px;
+  }
+
+  #craft-list .craft-name{font-size:.74rem}
+  #craft-list .craft-rarity{font-size:.62rem}
+  #craft-list .craft-info small{font-size:.59rem}
+  #craft-list .craft-item > button,
+  #craft-list .craft-item button{
+    min-width:58px;
+    min-height:44px;
+  }
+}
+
+/* Teléfonos muy pequeños: evita que icono/botón aplasten el texto. */
+@media (max-width:360px){
+  #panel-crafting{padding:9px}
+  #craft-list .craft-visual{gap:5px}
+  #craft-list .craft-icon{
+    flex-basis:32px;
+    width:32px;
+    height:32px;
+    font-size:22px;
+  }
+  #craft-list .craft-name{font-size:.7rem}
+  #craft-list .craft-info small{font-size:.56rem}
+  #craft-list .craft-item > button,
+  #craft-list .craft-item button{
+    min-width:54px;
+    max-width:62px;
+    padding:5px;
+  }
+}
