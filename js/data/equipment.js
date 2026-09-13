@@ -64,7 +64,6 @@ const EQUIPMENT_DEFINITIONS = {
     stats: {},
     abilities: {
       healthRegenAmount: 3,
-      healthRegenInterval: 20000
     }
   },
   /* ===== SET CRAFTEADO DEL MINERO DEL ABISMO ===== */
