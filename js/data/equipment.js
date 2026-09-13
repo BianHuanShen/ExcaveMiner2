@@ -63,7 +63,7 @@ const EQUIPMENT_DEFINITIONS = {
     slot: 'bicycle',
     stats: {},
     abilities: {
-      healthRegenAmount: 3,
+      healthRegenAmount: 3
     }
   },
   /* ===== SET CRAFTEADO DEL MINERO DEL ABISMO ===== */
