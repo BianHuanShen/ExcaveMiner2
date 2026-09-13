@@ -1,0 +1,363 @@
+/* =============================================================
+   EL MINERO DEL ABISMO — CONTROLES
+   D-Pad principal
+   ============================================================= */
+
+
+/* =============================================================
+   D-PAD PRINCIPAL
+   ============================================================= */
+
+#controls {
+  position: fixed;
+  z-index: 3000;
+
+  right: 18px;
+  bottom: 16px;
+
+  width: auto;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+
+  border: 1px solid rgba(255, 184, 48, .55);
+  border-radius: 14px;
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(19, 46, 72, .35),
+      transparent 48%
+    ),
+    rgba(4, 10, 19, .94);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 219, 143, .07),
+    0 8px 22px rgba(0, 0, 0, .55);
+
+  backdrop-filter: blur(7px);
+}
+
+
+/* =============================================================
+   ESTRUCTURA DEL D-PAD
+   ============================================================= */
+
+.dpad {
+  display: grid;
+
+  grid-template-columns: repeat(3, 50px);
+  grid-template-rows: repeat(3, 50px);
+
+  gap: 5px;
+}
+
+
+/* =============================================================
+   POSICIÓN DE LOS BOTONES
+   ============================================================= */
+
+#craft-touch {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#dig-up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#catalog-touch {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#dig-left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#go-home {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#dig-right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+#inventory-touch {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#dig-down {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+#shop-touch {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+
+/* =============================================================
+   BOTONES DEL D-PAD
+   ============================================================= */
+
+.dig-btn {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 2px solid #7f531e;
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #10243a,
+      #07101b 70%
+    );
+
+  color: #ffe6a2;
+
+  font-size: 22px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, .07),
+    inset -3px -4px 0 rgba(0, 0, 0, .38),
+    0 3px 0 #02050a;
+
+  transition:
+    transform .1s ease,
+    filter .1s ease,
+    box-shadow .1s ease;
+}
+
+
+/* =============================================================
+   ICONOS DE EXCAVACIÓN
+   ============================================================= */
+
+#dig-up::after {
+  content: "▲";
+}
+
+#dig-down::after {
+  content: "▼";
+}
+
+#dig-left::after {
+  content: "◀";
+}
+
+#dig-right::after {
+  content: "▶";
+}
+
+#go-home::after {
+  content: "⌂";
+}
+
+.dig-btn::after {
+  font-size: 22px;
+
+  color: #ffe09a;
+
+  text-shadow:
+    0 2px 4px #000,
+    0 0 6px rgba(255, 183, 51, .20);
+}
+
+
+/* =============================================================
+   BOTÓN REFUGIO
+   ============================================================= */
+
+.dig-btn.home {
+  background:
+    linear-gradient(
+      145deg,
+      #1d5533,
+      #0b2416 75%
+    );
+
+  border-color: #52d56b;
+
+  color: #e5ffe9;
+
+  box-shadow:
+    inset 2px 2px 0 rgba(215, 255, 224, .10),
+    0 0 10px rgba(55, 220, 95, .20),
+    0 3px 0 #020706;
+}
+
+.dig-btn.home::after {
+  color: #e5ffe9;
+}
+
+
+/* =============================================================
+   BOTONES DE UTILIDAD
+   🔨 Fabricar
+   📖 Catálogo
+   🎒 Inventario
+   🪙 Tienda
+   ============================================================= */
+
+.dig-btn.utility {
+  font-size: 20px;
+
+  color: #ffe09a;
+}
+
+
+/* =============================================================
+   FABRICAR
+   ============================================================= */
+
+.dig-btn.utility.craft-touch {
+  border-color: #a8782e;
+
+  background:
+    linear-gradient(
+      145deg,
+      #3b2812,
+      #120b05 75%
+    );
+}
+
+
+/* =============================================================
+   CATÁLOGO
+   ============================================================= */
+
+.dig-btn.utility.catalog-touch {
+  border-color: #4e7c9f;
+
+  background:
+    linear-gradient(
+      145deg,
+      #17344b,
+      #07121d 75%
+    );
+}
+
+
+/* =============================================================
+   INVENTARIO
+   ============================================================= */
+
+.dig-btn.utility.inventory-touch {
+  border-color: #8d6b2f;
+
+  background:
+    linear-gradient(
+      145deg,
+      #302716,
+      #110d07 75%
+    );
+}
+
+
+/* =============================================================
+   TIENDA
+   ============================================================= */
+
+.dig-btn.utility.shop-touch {
+  border-color: #c89a35;
+
+  background:
+    linear-gradient(
+      145deg,
+      #3a2b0e,
+      #120d04 75%
+    );
+}
+
+
+/* =============================================================
+   EFECTO DE LOS BOTONES
+   ============================================================= */
+
+.dig-btn:active {
+  transform: translateY(2px);
+
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, .06),
+    0 1px 0 #02050a;
+}
+
+
+/* =============================================================
+   DISABLED
+   ============================================================= */
+
+.dig-btn:disabled {
+  opacity: .4;
+
+  filter: grayscale(.5);
+
+  cursor: not-allowed;
+}
+
+
+/* =============================================================
+   MINI-CONTROLES
+   ============================================================= */
+
+#mini-controls {
+  position: fixed;
+
+  z-index: 3200;
+
+  right: 18px;
+  bottom: 16px;
+
+  pointer-events: none;
+}
+
+#mini-controls #controls {
+  pointer-events: auto;
+}
+
+
+/* =============================================================
+   FOCUS
+   ============================================================= */
+
+.dig-btn.utility:focus-visible {
+  outline: 2px solid #ffe09a;
+  outline-offset: 2px;
+}
+
+
+/* =============================================================
+   RESPONSIVE — MÓVILES
+   ============================================================= */
+
+@media (max-width: 520px) {
+
+  .dpad {
+    grid-template-columns: repeat(3, 44px);
+    grid-template-rows: repeat(3, 44px);
+
+    gap: 4px;
+  }
+
+}
